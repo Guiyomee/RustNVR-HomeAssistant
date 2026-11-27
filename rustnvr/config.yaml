@@ -1,0 +1,57 @@
+name: RustNVR
+version: "2026.11.11"
+# Shown as experimental in the app store: the first public version (beta).
+stage: experimental
+slug: rustnvr
+description: Enregistreur vidéo pour caméras RTSP (H.264/H.265 enregistrés sans réencodage), dans Home Assistant.
+url: https://github.com/Guiyomee/RustNVR-HomeAssistant/tree/main/rustnvr
+# The Docker image of RustNVR exists for x86-64 and ARM 64-bit.
+arch:
+  - aarch64
+  - amd64
+init: false
+startup: services
+boot: auto
+ingress: true
+ingress_port: 8080
+ingress_stream: true
+panel_icon: mdi:cctv
+panel_title: RustNVR
+# Every Home Assistant user sees the panel: RustNVR asks each one for a
+# login (its own accounts, administrator or viewer).
+panel_admin: false
+# /config: config.toml and the settings made in the interface (the app's
+# own folder, /addon_configs/<slug> on the host); recordings in /media
+# (or a network share added in Home Assistant, under /media or /share).
+map:
+  - addon_config:rw
+  - media:rw
+  - share:rw
+# The broker of Home Assistant (Mosquitto app), unless another one is given
+# in the Configuration tab.
+services:
+  - mqtt:want
+# Off by default: the interface outside Home Assistant (HTTP), and the RTSP
+# republication of the cameras.
+ports:
+  8080/tcp: null
+  8554/tcp: null
+ports_description:
+  8080/tcp: Interface hors de Home Assistant (HTTP)
+  8554/tcp: Republication RTSP des caméras
+options:
+  password: ""
+  mqtt_enabled: true
+  mqtt_port: 1883
+  mqtt_client_id: rustnvr-ha
+  mqtt_topic_prefix: rustnvr-ha
+schema:
+  password: password
+  mqtt_enabled: bool
+  # Empty: the Mosquitto of Home Assistant.
+  mqtt_host: match(^[A-Za-z0-9._-]+$)?
+  mqtt_port: port
+  mqtt_username: str?
+  mqtt_password: password?
+  mqtt_client_id: match(^[A-Za-z0-9._-]{1,64}$)
+  mqtt_topic_prefix: match(^[A-Za-z0-9_-]+(/[A-Za-z0-9_-]+)*$)

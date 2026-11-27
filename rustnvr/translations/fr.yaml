@@ -1,0 +1,25 @@
+configuration:
+  password:
+    name: Mot de passe du compte « admin »
+    description: Au moins 8 caractères. Compte administrateur de RustNVR, demandé à l'ouverture du panneau (les autres comptes se créent dans RustNVR, Paramètres → Comptes).
+  mqtt_enabled:
+    name: MQTT
+    description: Envoie les caméras, détections et boutons à Home Assistant par MQTT (découverte automatique).
+  mqtt_host:
+    name: Adresse du broker MQTT
+    description: Vide, le Mosquitto de Home Assistant, avec son compte donné automatiquement. Sinon, l'adresse d'un autre broker (par exemple 192.168.1.20).
+  mqtt_port:
+    name: Port du broker
+    description: 1883 en général. Ignoré avec le Mosquitto de Home Assistant.
+  mqtt_username:
+    name: Utilisateur MQTT
+    description: Seulement avec une adresse de broker indiquée.
+  mqtt_password:
+    name: Mot de passe MQTT
+    description: Seulement avec une adresse de broker indiquée.
+  mqtt_client_id:
+    name: Identifiant du client
+    description: Unique sur le broker. Un autre RustNVR branché sur le même broker utilise en général « rustnvr » ; deux clients au même identifiant s'éjectent sans arrêt.
+  mqtt_topic_prefix:
+    name: Préfixe des sujets
+    description: Début des sujets MQTT (rustnvr-ha/<caméra>/…). Différent de celui d'un autre RustNVR sur le même broker.

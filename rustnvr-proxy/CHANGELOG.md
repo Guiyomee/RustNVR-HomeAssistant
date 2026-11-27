@@ -4,7 +4,7 @@
 
 - L'app a déménagé dans le dépôt
   [RustNVR-HomeAssistant](https://github.com/Guiyomee/RustNVR-HomeAssistant),
-  où arrivera aussi l'app « RustNVR » (RustNVR dans Home Assistant). Rien ne change dans
+  avec l'app « RustNVR » (RustNVR dans Home Assistant). Rien ne change dans
   son fonctionnement.
 
 ## 1.1.0
